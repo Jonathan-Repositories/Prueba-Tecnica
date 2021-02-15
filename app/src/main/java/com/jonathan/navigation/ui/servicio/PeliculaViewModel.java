@@ -1,16 +1,16 @@
-package com.jonathan.navigation.ui.slideshow;
+package com.jonathan.navigation.ui.servicio;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel extends ViewModel {
+public class PeliculaViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SlideshowViewModel() {
+    public PeliculaViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("Fragmento");
     }
 
     public LiveData<String> getText() {

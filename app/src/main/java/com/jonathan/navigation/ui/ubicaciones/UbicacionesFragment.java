@@ -54,15 +54,12 @@ public class UbicacionesFragment extends Fragment {
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
-                                        //GeoPoint geoPoint = document.getGeoPoint("punto");
                                         Log.d("Ubicacion", " => " + document.getData().get("latitude"));
-                                        //String loc = document.getData().get("punto").toString();
                                         lat = Double.parseDouble(document.getData().get("latitude").toString());
                                         lng = Double.parseDouble(document.getData().get("longitude").toString());
-                                        //LatLng latLng = new LatLng(lat, lng);
                                         LatLng marcador = new LatLng(lat, lng);
                                         mMap.addMarker(new MarkerOptions().position(marcador).title("Punto"));
-                                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marcador, 15));
+                                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marcador, 13));
                                     }
                                 } else {
                                     Log.d("Ubicacion Error", "Error getting documents: ", task.getException());

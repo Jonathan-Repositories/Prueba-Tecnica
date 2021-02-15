@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore db;
     LocationManager locationManager;
     private Location loc;
-    //private final int TIEMPO = 1800000;
-    private final int TIEMPO = 5000;
+    private final int TIEMPO = 1800000;//Para cada media hora
+    //private final int TIEMPO = 5000;//Para prueba cada 5 segundos
     Handler handler = new Handler();
 
 
@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
             Map<String, Object> datos = new HashMap<>();
             datos.put("latitude", loc.getLatitude());
             datos.put("longitude", loc.getLongitude());
-            //datos.put("punto", Arrays.asList("latitude", Double.toString(loc.getLatitude()), "longitude", Double.toString(loc.getLongitude())));
             ubicaciones.document("ubi"+(int)(Math.random() * 100)).set(datos);
             Log.i("Actual ", Double.toString(loc.getLatitude()));
         }

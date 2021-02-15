@@ -1,6 +1,4 @@
-package com.jonathan.navigation.ui.home;
-
-import java.util.List;
+package com.jonathan.navigation.ui.servicio;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

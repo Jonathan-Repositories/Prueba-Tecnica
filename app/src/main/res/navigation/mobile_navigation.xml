@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.jonathan.navigation.ui.home.HomeFragment"
+        android:name="com.jonathan.navigation.ui.servicio.PeliculaFragment"
         android:label="Peliculas"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_pelicula" />
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.jonathan.navigation.ui.slideshow.SlideshowFragment"
+        android:name="com.jonathan.navigation.ui.archivos.ArchivosFragment"
         android:label="Subir Imágenes"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_archivos" />
 </navigation>

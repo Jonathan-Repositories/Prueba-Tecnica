@@ -1,4 +1,4 @@
-package com.jonathan.navigation.ui.slideshow;
+package com.jonathan.navigation.ui.archivos;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.jonathan.navigation.R;
 
-public class SlideshowFragment extends Fragment {
+public class ArchivosFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private ArchivosViewModel archivosViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        archivosViewModel =
+                new ViewModelProvider(this).get(ArchivosViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_archivos, container, false);
         final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        archivosViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
