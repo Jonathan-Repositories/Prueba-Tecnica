@@ -1,7 +1,9 @@
 package com.jonathan.navigation;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -10,6 +12,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 
+import com.firebase.geofire.GeoFireUtils;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore db;
     LocationManager locationManager;
     private Location loc;
-    private final int TIEMPO = 1800000;
+    //private final int TIEMPO = 1800000;
+    private final int TIEMPO = 5000;
     Handler handler = new Handler();
 
 
@@ -51,23 +56,17 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         ejecutarTarea();
-
-
-        /*db.collection("Ubicaciones")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Log.d("Ubicacion", document.getId() + " => " + document.getString("lat"));
-                                Log.d("Ubicacion", " => " + document.getData().get("punto").toString());
-                            }
-                        } else {
-                            Log.d("Ubicacion Error", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });*/
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Desliza de la orilla izquierda a derecha para mostrar el menú");
+        builder.setTitle("Atención");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void ejecutarTarea() {
@@ -90,14 +89,13 @@ public class MainActivity extends AppCompatActivity {
 
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            /*Map<String,Object> latlong = new HashMap<>();
-            latlong.put("lat", loc.getLatitude());
-            latlong.put("long", loc.getLongitude());*/
             db = FirebaseFirestore.getInstance();
             CollectionReference ubicaciones = db.collection("Ubicaciones");
-            Map<String, Object> data1 = new HashMap<>();
-            data1.put("punto", Arrays.asList("lat", Double.toString(loc.getLatitude()), "lon", Double.toString(loc.getLongitude())));
-            ubicaciones.document("ubi"+(int)(Math.random() * 100)).set(data1);
+            Map<String, Object> datos = new HashMap<>();
+            datos.put("latitude", loc.getLatitude());
+            datos.put("longitude", loc.getLongitude());
+            //datos.put("punto", Arrays.asList("latitude", Double.toString(loc.getLatitude()), "longitude", Double.toString(loc.getLongitude())));
+            ubicaciones.document("ubi"+(int)(Math.random() * 100)).set(datos);
             Log.i("Actual ", Double.toString(loc.getLatitude()));
         }
     }
