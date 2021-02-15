@@ -10,7 +10,7 @@ public class ArchivosViewModel extends ViewModel {
 
     public ArchivosViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("Subir Archivos");
     }
 
     public LiveData<String> getText() {
